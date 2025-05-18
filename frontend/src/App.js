@@ -10,14 +10,16 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const authenticateAndFetchData = async () => {
+    const checkAuthStatus = async () => {
       try {
-        // Simulate or implement authentication
-        const authRes = await axios.get('http://localhost:5000/auth/google'); 
-        if (authRes.status === 200) {
+        const res = await axios.get('https://youtub-api.onrender.com/auth/status', {
+          withCredentials: true,
+        });
+  
+        if (res.data.authenticated) {
           setIsAuthenticated(true);
-
-          // Proceed to fetch video data after auth
+  
+          // Fetch video data
           const videoRes = await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
             params: {
               part: 'snippet,statistics',
@@ -25,14 +27,18 @@ function App() {
               key: process.env.REACT_APP_YOUTUBE_API_KEY
             }
           });
+  
           setVideoData(videoRes.data.items[0]);
+        } else {
+          // Not authenticated, redirect to auth
+          window.location.href = 'https://youtub-api.onrender.com/auth/google';
         }
-      } catch (error) {
-        console.error('Authentication or data fetch failed:', error);
+      } catch (err) {
+        console.error('Auth check failed:', err);
       }
     };
-
-    authenticateAndFetchData();
+  
+    checkAuthStatus();
   }, [videoId]);
 
   return (
