@@ -13,7 +13,7 @@ function App() {
     const authenticateAndFetchData = async () => {
       try {
         // Simulate or implement authentication
-        const authRes = await axios.get('https://youtub-api.onrender.com/api/auth/google'); // Replace with real auth endpoint
+        const authRes = await axios.get('http://localhost:5000/auth/google'); 
         if (authRes.status === 200) {
           setIsAuthenticated(true);
 

@@ -12,7 +12,7 @@ const videoRoutes = require('./routes/video');
 const app = express();
 
 app.use(cors({
-  origin: 'https://youtub-api-two.vercel.app/', // your frontend URL
+  origin: 'http://localhost:3000', // your frontend URL
   credentials: true, // to send cookies with CORS
 }));
 app.use(express.json());
@@ -22,6 +22,8 @@ app.use(cookieSession({
   name: 'session',
   keys: [process.env.SESSION_SECRET || 'secret_key_here'],
   maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  sameSite: 'none', // 👈 Required for cross-site cookies
+  secure: true, 
 }));
 
 // Setup OAuth2 client
@@ -57,6 +59,13 @@ app.get('/auth/google/callback', async (req, res) => {
   } catch (error) {
     console.error('Error exchanging code for tokens:', error);
     res.status(500).send('Authentication failed');
+  }
+});
+app.get('/auth/status', (req, res) => {
+  if (req.session.tokens) {
+    res.json({ authenticated: true });
+  } else {
+    res.json({ authenticated: false });
   }
 });
 
