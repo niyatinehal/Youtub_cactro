@@ -12,7 +12,7 @@ const videoRoutes = require('./routes/video');
 const app = express();
 
 app.use(cors({
-  origin: 'https://youtub-api-two.vercel.app/', // your frontend URL
+  origin: 'https://youtub-api-two.vercel.app', // your frontend URL
   credentials: true, // to send cookies with CORS
 }));
 app.use(express.json());
