@@ -55,7 +55,7 @@ app.get('/auth/google/callback', async (req, res) => {
   try {
     const { tokens } = await oauth2Client.getToken(code);
     req.session.tokens = tokens; // Save tokens in sessio
-    res.redirect('http://localhost:3000/'); // redirect to frontend after login
+    res.redirect('https://youtub-api-two.vercel.app/'); // redirect to frontend after login
   } catch (error) {
     console.error('Error exchanging code for tokens:', error);
     res.status(500).send('Authentication failed');
