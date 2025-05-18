@@ -7,12 +7,12 @@ function NotesSection({ videoId }) {
   const [search, setSearch] = useState('');
 
   const fetchNotes = async () => {
-    const res = await axios.get(`/api/notes?videoId=${videoId}&search=${search}`);
+    const res = await axios.get(`https://youtub-api.onrender.com/api/notes?videoId=${videoId}&search=${search}`);
     setNotes(res.data);
   };
 
   const postNote = async () => {
-    await axios.post('/api/notes', { videoId, content });
+    await axios.post('https://youtub-api.onrender.com/api/notes', { videoId, content });
     setContent('');
     fetchNotes();
   };

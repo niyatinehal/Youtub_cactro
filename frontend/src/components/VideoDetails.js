@@ -6,7 +6,7 @@ function VideoDetails({ video }) {
   const [description, setDescription] = useState(video.snippet.description);
 
   const handleUpdate = async () => {
-    await axios.put(`/api/video/${video.id}`, { title, description });
+    await axios.put(`https://youtub-api.onrender.com/api/video/${video.id}`, { title, description });
     alert('Update simulated (OAuth required for real update).');
   };
 

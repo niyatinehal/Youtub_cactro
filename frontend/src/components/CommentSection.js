@@ -6,12 +6,12 @@ function CommentsSection({ videoId }) {
   const [text, setText] = useState('');
 
   const fetchComments = async () => {
-    const res = await axios.get(`/api/comments?videoId=${videoId}`);
+    const res = await axios.get(`https://youtub-api.onrender.com/api/comments?videoId=${videoId}`);
     setComments(res.data);
   };
 
   const postComment = async () => {
-    await axios.post('/api/comments', { videoId, text });
+    await axios.post('https://youtub-api.onrender.com/api/comments', { videoId, text });
     setText('');
     fetchComments();
   };

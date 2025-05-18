@@ -5,7 +5,7 @@ import CommentsSection from './components/CommentSection';
 import NotesSection from './components/NoteSection';
 
 function App() {
-  const [videoId, setVideoId] = useState('YOUR_VIDEO_ID');
+  const [videoId, setVideoId] = useState('BqH6ZRjeBUg');
   const [videoData, setVideoData] = useState(null);
 
   useEffect(() => {
