@@ -13,6 +13,17 @@ function VideoDetails({ video }) {
   return (
     <div className="mb-4">
       <h2 className="text-lg font-semibold">Video Details</h2>
+      <div className="aspect-video w-full mb-4">
+        <iframe
+          width="100%"
+          height="315"
+          src={`https://www.youtube.com/embed/${video.id}`}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
       <p><strong>Title:</strong> {video.snippet.title}</p>
       <p><strong>Description:</strong> {video.snippet.description}</p>
       <p><strong>Views:</strong> {video.statistics.viewCount}</p>

@@ -7,19 +7,32 @@ import NotesSection from './components/NoteSection';
 function App() {
   const [videoId, setVideoId] = useState('BqH6ZRjeBUg');
   const [videoData, setVideoData] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const fetchVideoData = async () => {
-      const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
-        params: {
-          part: 'snippet,statistics',
-          id: videoId,
-          key: process.env.REACT_APP_YOUTUBE_API_KEY
+    const authenticateAndFetchData = async () => {
+      try {
+        // Simulate or implement authentication
+        const authRes = await axios.get('https://youtub-api.onrender.com/api/auth/google'); // Replace with real auth endpoint
+        if (authRes.status === 200) {
+          setIsAuthenticated(true);
+
+          // Proceed to fetch video data after auth
+          const videoRes = await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
+            params: {
+              part: 'snippet,statistics',
+              id: videoId,
+              key: process.env.REACT_APP_YOUTUBE_API_KEY
+            }
+          });
+          setVideoData(videoRes.data.items[0]);
         }
-      });
-      setVideoData(res.data.items[0]);
+      } catch (error) {
+        console.error('Authentication or data fetch failed:', error);
+      }
     };
-    fetchVideoData();
+
+    authenticateAndFetchData();
   }, [videoId]);
 
   return (

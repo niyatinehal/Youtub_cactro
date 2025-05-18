@@ -17,7 +17,7 @@ function CommentsSection({ videoId }) {
   };
 
   const deleteComment = async (id) => {
-    await axios.delete(`/api/comments/${id}`);
+    await axios.delete(`https://youtub-api.onrender.com/api/comments/${id}`);
     fetchComments();
   };
 

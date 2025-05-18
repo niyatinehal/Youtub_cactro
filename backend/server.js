@@ -12,7 +12,7 @@ const videoRoutes = require('./routes/video');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000', // your frontend URL
+  origin: 'https://youtub-api-two.vercel.app/', // your frontend URL
   credentials: true, // to send cookies with CORS
 }));
 app.use(express.json());
@@ -52,8 +52,8 @@ app.get('/auth/google/callback', async (req, res) => {
 
   try {
     const { tokens } = await oauth2Client.getToken(code);
-    req.session.tokens = tokens; // Save tokens in session
-    res.redirect('http://localhost:3000'); // redirect to frontend after login
+    req.session.tokens = tokens; // Save tokens in sessio
+    res.redirect('https://youtub-api-two.vercel.app'); // redirect to frontend after login
   } catch (error) {
     console.error('Error exchanging code for tokens:', error);
     res.status(500).send('Authentication failed');
